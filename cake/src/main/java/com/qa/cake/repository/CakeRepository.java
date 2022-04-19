@@ -7,5 +7,5 @@ import com.qa.cake.domain.Cake;
 
 @Repository
 public interface CakeRepository extends JpaRepository<Cake,Long>{
-
+	
 }
