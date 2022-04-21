@@ -17,3 +17,10 @@ div{text-align: center;}
     padding: 10px;
     margin: 5px;
 }
+
+#createBox {
+    width: 300px;
+    border: 10px solid rgb(206, 110, 33);
+    padding: 10px;
+    margin: 5px;
+}

@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,17 +29,20 @@ public class CakeController {
 	public CakeController(CakeService service) {
 		this.service = service;
 	}
-
+	
+	@CrossOrigin
 	@PostMapping("/createCake")
 	public ResponseEntity<Cake> createCake(@RequestBody Cake cake) {
 		return new ResponseEntity<Cake>(service.create(cake), HttpStatus.CREATED);
 	}
 
+	@CrossOrigin
 	@GetMapping("/getAllCakes")
 	public ResponseEntity<List<Cake>> getAllCakes() {
 		return ResponseEntity.ok(service.getAll());
 	}
 
+	@CrossOrigin
 	@GetMapping("/getOne/{index}")
 	public ResponseEntity<Cake> getCakeById(@PathVariable Long index) {
 		try {
@@ -48,6 +52,7 @@ public class CakeController {
 		}
 	}
 
+	@CrossOrigin
 	@PutMapping("/update/{index}")
 	public ResponseEntity<Cake> updateCakeById(@PathVariable Long index, @RequestBody Cake cake) {
 		try {
@@ -57,6 +62,7 @@ public class CakeController {
 		}
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/remove/{index}")
 	public ResponseEntity<Boolean> removeCharacter(@PathVariable Long index){
 		try {

@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-
 @SpringBootApplication
 public class CakeApplication {
 
@@ -12,5 +11,4 @@ public class CakeApplication {
 		SpringApplication.run(CakeApplication.class, args);
 		System.out.println("Application Started");
 	}
-
 }
