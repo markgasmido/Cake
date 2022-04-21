@@ -22,7 +22,7 @@ import com.qa.cake.service.CakeService;
 @RestController
 @CrossOrigin
 @RequestMapping("/index.html/")
-public class CakeController {
+public class CakeController { 
 
 	@Autowired
 	private CakeService service;

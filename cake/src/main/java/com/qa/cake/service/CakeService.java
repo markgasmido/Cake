@@ -10,7 +10,7 @@ import com.qa.cake.domain.Cake;
 import com.qa.cake.repository.CakeRepository;
 
 @Service
-public class CakeService {
+public class CakeService { 
 	
 	@Autowired
 	private CakeRepository repository;

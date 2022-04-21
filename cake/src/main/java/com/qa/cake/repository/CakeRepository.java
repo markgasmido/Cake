@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.qa.cake.domain.Cake;
 
 @Repository
-public interface CakeRepository extends JpaRepository<Cake,Long>{
+public interface CakeRepository extends JpaRepository<Cake,Long>{ 
 
 	Optional<Cake> findByCakeName(String cakeName);
 	

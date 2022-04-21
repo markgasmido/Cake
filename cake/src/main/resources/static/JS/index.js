@@ -31,6 +31,13 @@ const updateURL = document.querySelector("#updateCakeURLInput");
 
 
 
+//Initial load
+const loadCakes = () => {
+    axios
+        .get(`${URL}/getAllCakes`)
+        .then()
+        .catch(err => console.log(err));
+}
 
 
 
