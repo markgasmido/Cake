@@ -179,9 +179,15 @@ const createCake = () => {
         .then(res => {
             console.log(res);
             addCakeToContentArea(res);
+            resetCreateForm();
         }).catch(err => console.log(err));
 }
 
+const resetCreateForm = () => {
+    cakeName.value = "";
+    cakeURL.value = "";
+    cakeDescription.value = "";
+}
 
 // search for a cake using name - faulty
 const getCakeByName = () => {
@@ -259,7 +265,7 @@ const updateCake = () => {
         .then(res =>{
             console.log(res);
             updateDisplay(res);
-            // resetUpdateForm();
+            resetUpdateForm();
         })
 }
 
