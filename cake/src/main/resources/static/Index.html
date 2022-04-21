@@ -54,7 +54,6 @@
                                      
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="searchDeleteButton" onclick="deleteCake()">Delete</button>
                                         <button id="searchModalClose" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -85,8 +84,9 @@
             <!-- Cake creation section -->
             <div class="row">
                 <div class="col" id="createBox">
-                    <h1>MAKE A CAKE</h1>
+                    <h1>Manage Cake</h1>
                     <form>
+                        <h3>Create a cake</h3>
                         <div class="row g-2 align-items-center">
                             <div class="col-auto">
                                 <label for="cakeNameInput" class="col-form-label">Cake Name</label>
@@ -113,8 +113,44 @@
                                     >
                             </div>
                             <div class="col-auto">
-                                <!-- <button id="createButton">Create</button> -->
                                 <input id="createButton" class="btn btn-success" type="button" value="Create">
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <form>
+                        <h3>Update a cake</h3>
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="updateCakeIdInput" class="col-form-label">Cake Id</label>
+                            </div>
+                            <div class="col-auto">
+                                <input id="updateCakeIdInput" type="number" class="form-control">
+                            </div>
+                            <div class="col-auto">
+                                <label for="updateCakeNameInput" class="col-form-label">Cake Name</label>
+                            </div>
+                            <div class="col-auto">
+                                <input id="updateCakeNameInput" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="updateCakeDescriptionInput" class="col-form-label">Description and recipe</label>
+                            </div>
+                            <div class="col-auto">
+                                <textarea id="updateCakeDescriptionInput" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="updateCakeURLInput" class="col-form-label">Image URL</label>
+                            </div>
+                            <div class="col-auto">
+                                <input id="updateCakeURLInput" class="form-control">
+                            </div>
+                            <div class="col-auto">
+                                <input id="updateButton" class="btn btn-warning" type="button" value="Update" onclick="updateCake()">
                             </div>
                         </div>
                     </form>
