@@ -275,7 +275,7 @@ const updateDisplay = (res) => {
     modalTitle.innerHTML = `${res.data.cakeName}`;
 
     const modalBody = document.querySelector(`#modal-body${res.data.id}`);
-    modalBody.innerHTML = `${res.data.cakeName}`;
+    modalBody.innerHTML = `${res.data.cakeDescription}`;
 
 }
 
