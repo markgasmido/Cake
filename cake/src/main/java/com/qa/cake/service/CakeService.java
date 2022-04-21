@@ -35,6 +35,14 @@ public class CakeService {
 		return null;
 	}
 	
+	public Cake getByCakeName(String cakeName) {
+		Optional<Cake> optionalCake = repository.findByCakeName(cakeName);
+		if(optionalCake.isPresent()) {
+			return optionalCake.get();
+		}
+		return null;
+	}
+	
 	public boolean remove(Long id) {
 		repository.deleteById(id);
 		return repository.existsById(id);

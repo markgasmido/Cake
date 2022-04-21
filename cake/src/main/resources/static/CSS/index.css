@@ -1,8 +1,20 @@
-
 /* App wide css */
-p {text-align: center;}
-h2 {text-align: center;}
-div{text-align: center;}
+p {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+hr {
+    border: 10px solid rgb(255, 0, 0);
+    border-radius: 5px;
+}
 
 #displayBox {
     width: 300px;

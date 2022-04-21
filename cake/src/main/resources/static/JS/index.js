@@ -1,10 +1,19 @@
 'use strict';
 const URL = "http://localhost:4500/index.html";
 const display = document.querySelector("#contentArea");
+
+//create
 const createButton = document.querySelector("#createButton");
 const cakeName = document.querySelector("#cakeNameInput");
 const cakeURL = document.querySelector("#cakeURLInput");
 const cakeDescription = document.querySelector("#cakeDescriptionInput");
+
+//search
+const nameInput = document.querySelector("#searchName");
+const searchButton = document.querySelector("#searchButton");
+const searchTitle = document.querySelector("#searchModalTitle");
+const searchBody = document.querySelector("#searchModalBody");
+
 
 
 //Create a cake
@@ -51,7 +60,7 @@ const addCakeToContentArea = (res) => {
     modalDiv.setAttribute("aria-hidden", "true");
 
     const modalDialogue = document.createElement("div");
-    modalDialogue.setAttribute("class", "modal-dialog");
+    modalDialogue.setAttribute("class", "modal-dialog modal-dialog-centered");
 
     const modalContent = document.createElement("div");
     modalContent.setAttribute("class", "modal-content");
@@ -102,10 +111,10 @@ const addCakeToContentArea = (res) => {
     bodyDiv.appendChild(modalDiv);
     mainDiv.appendChild(bodyDiv);
     display.appendChild(mainDiv);
+    
 }
 
 const createCake = () => {
-
     const cakeNameValue = cakeName.value;
     const cakeURLValue = cakeURL.value;
     const cakeDescriptionValue = cakeDescription.value;
@@ -126,5 +135,23 @@ const createCake = () => {
 }
 
 
+// search for a cake using name
+const getCakeByName = () => {
+    const cakeName = nameInput.value;
+
+    axios
+        .get(`${URL}/getOneByName/${cakeName}`)
+        .then(res => {
+            const text = document.createTextNode(`${res.data.cakeName}`);
+            searchTitle.appendChild(text);
+
+            const text2 = document.createTextNode(`${res.data.cakeDescription}`);
+            searchBody.appendChild(text2);
+        })
+        .catch(err => console.log(err));
+}
+
+
 //Event listeners
 createButton.addEventListener("click", createCake);
+searchButton.addEventListener("click", getCakeByName);

@@ -20,6 +20,7 @@ import com.qa.cake.domain.Cake;
 import com.qa.cake.service.CakeService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/index.html/")
 public class CakeController {
 
@@ -29,20 +30,17 @@ public class CakeController {
 	public CakeController(CakeService service) {
 		this.service = service;
 	}
-	
-	@CrossOrigin
+
 	@PostMapping("/createCake")
 	public ResponseEntity<Cake> createCake(@RequestBody Cake cake) {
 		return new ResponseEntity<Cake>(service.create(cake), HttpStatus.CREATED);
 	}
 
-	@CrossOrigin
 	@GetMapping("/getAllCakes")
 	public ResponseEntity<List<Cake>> getAllCakes() {
 		return ResponseEntity.ok(service.getAll());
 	}
 
-	@CrossOrigin
 	@GetMapping("/getOne/{index}")
 	public ResponseEntity<Cake> getCakeById(@PathVariable Long index) {
 		try {
@@ -52,7 +50,15 @@ public class CakeController {
 		}
 	}
 
-	@CrossOrigin
+	@GetMapping("/getOneByName/{cakeName}")
+	public ResponseEntity<Cake> getCakeByCakeName(@PathVariable String cakeName) {
+		try {
+			return new ResponseEntity<Cake>(service.getByCakeName(cakeName), HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@PutMapping("/update/{index}")
 	public ResponseEntity<Cake> updateCakeById(@PathVariable Long index, @RequestBody Cake cake) {
 		try {
@@ -61,13 +67,12 @@ public class CakeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@CrossOrigin
+
 	@DeleteMapping("/remove/{index}")
-	public ResponseEntity<Boolean> removeCharacter(@PathVariable Long index){
+	public ResponseEntity<Boolean> removeCharacter(@PathVariable Long index) {
 		try {
 			return ResponseEntity.ok(service.remove(index));
-		} catch (NoSuchElementException e ) {
+		} catch (NoSuchElementException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
