@@ -14,14 +14,19 @@ const searchButton = document.querySelector("#searchButton");
 const searchTitle = document.querySelector("#searchModalTitle");
 const searchBody = document.querySelector("#searchModalBody");
 
+//delete
+const cakeId = document.querySelector("#cakeId");
+
+
+
 
 
 //Create a cake
 const addCakeToContentArea = (res) => {
     const mainDiv = document.createElement("div");
-    mainDiv.setAttribute("class", "card");
+    mainDiv.setAttribute("class", "card cake");
     mainDiv.setAttribute("style", "width: 18rem;");
-    mainDiv.setAttribute("id", "box");
+    mainDiv.setAttribute("id", `mainDiv${res.data.id}`);
 
     //card image
     const img = document.createElement("img");
@@ -48,6 +53,9 @@ const addCakeToContentArea = (res) => {
     cardButton.setAttribute("data-bs-target", `#Modal${res.data.id}`);
     const text2 = document.createTextNode("Show More!");
 
+
+
+
     cardButton.appendChild(text2);
     bodyDiv.appendChild(cardButton);
 
@@ -68,12 +76,18 @@ const addCakeToContentArea = (res) => {
     const modalHeader = document.createElement("div");
     modalHeader.setAttribute("class", "modal-header");
 
+    const modalId = document.createElement("h6");
+    modalId.setAttribute("id", "cakeId");
+    const text3 = document.createTextNode(`${res.data.id}`);
+    modalId.appendChild(text3);
+
     const modalName = document.createElement("h5");
     modalName.setAttribute("class", "modal-title");
     modalName.setAttribute("id", `${res.data.id}ModalLabel`);
 
-    const text3 = document.createTextNode(`${res.data.cakeName}`);
-    modalName.appendChild(text3);
+    const text4 = document.createTextNode(`${res.data.cakeName}`);
+    modalName.appendChild(modalId);
+    modalName.appendChild(text4);
     modalHeader.appendChild(modalName);
 
     const closeButton = document.createElement("button");
@@ -88,9 +102,9 @@ const addCakeToContentArea = (res) => {
     const modalBody = document.createElement("div");
     modalBody.setAttribute("class", "modal-body");
 
-    const text4 = document.createTextNode(`${res.data.cakeDescription}`);
+    const text5 = document.createTextNode(`${res.data.cakeDescription}`);
 
-    modalBody.appendChild(text4);
+    modalBody.appendChild(text5);
     modalContent.appendChild(modalBody);
 
     const modalFooter = document.createElement("div");
@@ -100,18 +114,31 @@ const addCakeToContentArea = (res) => {
     closeButton2.setAttribute("type", "button");
     closeButton2.setAttribute("class", "btn btn-secondary");
     closeButton2.setAttribute("data-bs-dismiss", "modal");
-
-    const text5 = document.createTextNode("Close");
-
-    closeButton2.appendChild(text5);
+    const text6 = document.createTextNode("Close");
+    closeButton2.appendChild(text6);
     modalFooter.appendChild(closeButton2);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("type", "button");
+    deleteButton.setAttribute("class", "btn btn-danger");
+    deleteButton.setAttribute("data-bs-dismiss", "modal");
+    deleteButton.setAttribute("id", "deleteButton");
+    deleteButton.setAttribute("onClick", "deleteCake()");
+
+
+    const text7 = document.createTextNode("Delete");
+    deleteButton.appendChild(text7);
+    modalFooter.appendChild(deleteButton);
+
+
+
     modalContent.appendChild(modalFooter);
     modalDialogue.appendChild(modalContent);
     modalDiv.appendChild(modalDialogue);
     bodyDiv.appendChild(modalDiv);
     mainDiv.appendChild(bodyDiv);
     display.appendChild(mainDiv);
-    
+
 }
 
 const createCake = () => {
@@ -151,7 +178,26 @@ const getCakeByName = () => {
         .catch(err => console.log(err));
 }
 
+// delete a cake
+const deleteCake = () => {
+    const cakeId = document.querySelector("#cakeId");
+    const id = cakeId.innerHTML;
+    const toRemoveFromDisplay = document.querySelector(`#mainDiv${id}`);
+
+    axios
+        .delete(`${URL}/remove/${id}`)
+        .then(res => {
+            while(toRemoveFromDisplay.firstChild){
+                toRemoveFromDisplay.removeChild(toRemoveFromDisplay.firstChild);
+            }
+            display.removeChild(toRemoveFromDisplay);
+        }).catch(err => console.log(err));
+
+
+}
+
 
 //Event listeners
 createButton.addEventListener("click", createCake);
 searchButton.addEventListener("click", getCakeByName);
+
