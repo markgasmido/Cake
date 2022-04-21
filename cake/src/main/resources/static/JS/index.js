@@ -13,9 +13,15 @@ const nameInput = document.querySelector("#searchName");
 const searchButton = document.querySelector("#searchButton");
 const searchTitle = document.querySelector("#searchModalTitle");
 const searchBody = document.querySelector("#searchModalBody");
+const searchTopClose = document.querySelector("#searchTopClose");
+const searchModalClose = document.querySelector("#searchModalClose");
 
-//delete
+//delete + update
 const cakeId = document.querySelector("#cakeId");
+const searchDeleteButton = document.querySelector("#searchDeleteButton");
+
+
+
 
 
 
@@ -110,14 +116,6 @@ const addCakeToContentArea = (res) => {
     const modalFooter = document.createElement("div");
     modalFooter.setAttribute("class", "modal-footer");
 
-    const closeButton2 = document.createElement("button");
-    closeButton2.setAttribute("type", "button");
-    closeButton2.setAttribute("class", "btn btn-secondary");
-    closeButton2.setAttribute("data-bs-dismiss", "modal");
-    const text6 = document.createTextNode("Close");
-    closeButton2.appendChild(text6);
-    modalFooter.appendChild(closeButton2);
-
     const deleteButton = document.createElement("button");
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("class", "btn btn-danger");
@@ -129,6 +127,15 @@ const addCakeToContentArea = (res) => {
     const text7 = document.createTextNode("Delete");
     deleteButton.appendChild(text7);
     modalFooter.appendChild(deleteButton);
+
+    const closeButton2 = document.createElement("button");
+    closeButton2.setAttribute("type", "button");
+    closeButton2.setAttribute("class", "btn btn-secondary");
+    closeButton2.setAttribute("data-bs-dismiss", "modal");
+    const text6 = document.createTextNode("Close");
+    closeButton2.appendChild(text6);
+    modalFooter.appendChild(closeButton2);
+
 
 
 
@@ -178,6 +185,12 @@ const getCakeByName = () => {
         .catch(err => console.log(err));
 }
 
+const resetModal = () => {
+    searchBody.innerHTML = "";
+    searchTitle.innerHTML = "";
+}
+
+
 // delete a cake
 const deleteCake = () => {
     const cakeId = document.querySelector("#cakeId");
@@ -197,7 +210,14 @@ const deleteCake = () => {
 }
 
 
+
+//update a cake
+
+
 //Event listeners
 createButton.addEventListener("click", createCake);
 searchButton.addEventListener("click", getCakeByName);
+searchModalClose.addEventListener("click", resetModal);
+searchTopClose.addEventListener("click",resetModal);
+searchDeleteButton.addEventListener("click",resetModal);
 
