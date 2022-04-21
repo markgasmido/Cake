@@ -35,10 +35,14 @@
                 </div>
                 <div class="col">
                     <form >
-                        <input id="searchName" placeholder="Search for a cake using cake name..." type="text">
                         <!-- Button trigger search modal -->
+                        <input id="searchName" placeholder="cake using name..." type="text">
+                        <button id="searchButton2" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            Search Name
+                        </button>
+                        <input id="searchId" placeholder="cake using id..." type="number">
                         <button id="searchButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchModal">
-                            Search
+                            Search Id
                         </button>
                         
                         <!-- Search Modal -->

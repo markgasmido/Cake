@@ -9,8 +9,10 @@ const cakeURL = document.querySelector("#cakeURLInput");
 const cakeDescription = document.querySelector("#cakeDescriptionInput");
 
 //search
-const nameInput = document.querySelector("#searchName");
+const searchId = document.querySelector("#searchId");
+const searchName = document.querySelector("#searchName");
 const searchButton = document.querySelector("#searchButton");
+const searchButton2 = document.querySelector("#searchButton2")
 const searchTitle = document.querySelector("#searchModalTitle");
 const searchBody = document.querySelector("#searchModalBody");
 const searchTopClose = document.querySelector("#searchTopClose");
@@ -174,9 +176,9 @@ const createCake = () => {
 }
 
 
-// search for a cake using name
+// search for a cake using name - faulty
 const getCakeByName = () => {
-    const cakeName = nameInput.value;
+    const cakeName = searchName.value;
 
     axios
         .get(`${URL}/getOneByName/${cakeName}`)
@@ -189,6 +191,24 @@ const getCakeByName = () => {
         })
         .catch(err => console.log(err));
 }
+
+
+// search for a cake using id
+const getCakeById = () => {
+    const cakeId = searchId.value;
+
+    axios
+        .get(`${URL}/getOne/${cakeId}`)
+        .then(res => {
+            const text = document.createTextNode(`${res.data.cakeName}`);
+            searchTitle.appendChild(text);
+
+            const text2 = document.createTextNode(`${res.data.cakeDescription}`);
+            searchBody.appendChild(text2);
+        })
+        .catch(err => console.log(err));
+}
+
 
 const resetModal = () => {
     searchBody.innerHTML = "";
@@ -203,6 +223,7 @@ const deleteCake = (id) => {
     axios
         .delete(`${URL}/remove/${id}`)
         .then(res => {
+            console.log(res);
             while(toRemoveFromDisplay.firstChild){
                 toRemoveFromDisplay.removeChild(toRemoveFromDisplay.firstChild);
             }
@@ -236,12 +257,13 @@ const updateCake = () => {
 }
 
 const updateDisplay = (res) => {
-    const toUpdate = document.querySelector(`#`)
+    const toUpdate = document.querySelector(`#`);
 }
 
 //Event listeners
 createButton.addEventListener("click", createCake);
-searchButton.addEventListener("click", getCakeByName);
+searchButton.addEventListener("click", getCakeById);
+searchButton2.addEventListener("click", getCakeByName);
 searchModalClose.addEventListener("click", resetModal);
 searchTopClose.addEventListener("click",resetModal);
 updateButton.addEventListener("click", updateCake);
