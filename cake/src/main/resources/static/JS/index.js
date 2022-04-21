@@ -107,7 +107,7 @@ const addCakeToContentArea = (res) => {
 const createCake = () => {
 
     const cakeNameValue = cakeName.value;
-    const cakeURLValue = cakeURL.innerHTML;
+    const cakeURLValue = cakeURL.value;
     const cakeDescriptionValue = cakeDescription.value;
 
 
