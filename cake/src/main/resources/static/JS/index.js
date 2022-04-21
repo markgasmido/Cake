@@ -46,6 +46,7 @@ const addCakeToContentArea = (res) => {
     img.setAttribute("src", `${res.data.cakeURL}`);
     img.setAttribute("class", "card-img-top");
     img.setAttribute("alt", `${res.data.cakeName}`);
+    img.setAttribute("id",`URL${res.data.id}`);
 
     mainDiv.appendChild(img);
 
@@ -54,6 +55,7 @@ const addCakeToContentArea = (res) => {
     bodyDiv.setAttribute("class", "card-body");
 
     const h5 = document.createElement("h5");
+    h5.setAttribute("id",`cardCakeName${res.data.id}`)
     const text = document.createTextNode(`${res.data.cakeName}`);
 
     h5.appendChild(text);
@@ -90,17 +92,21 @@ const addCakeToContentArea = (res) => {
     modalHeader.setAttribute("class", "modal-header");
 
     const modalId = document.createElement("h6");
-    modalId.setAttribute("id", "cakeId");
+    modalId.setAttribute("id", `cakeId${res.data.id}`);
     const text3 = document.createTextNode(`${res.data.id}`);
     modalId.appendChild(text3);
 
     const modalName = document.createElement("h5");
     modalName.setAttribute("class", "modal-title");
-    modalName.setAttribute("id", `${res.data.id}ModalLabel`);
+    modalName.setAttribute("id", `ModalLabel${res.data.id}`);
 
     const text4 = document.createTextNode(`${res.data.cakeName}`);
+    const h52 = document.createElement("h5");
+    h52.setAttribute("id",`h52${res.data.id}`);
+    h52.appendChild(text4)
+    
     modalName.appendChild(modalId);
-    modalName.appendChild(text4);
+    modalName.appendChild(h52);
     modalHeader.appendChild(modalName);
 
     const closeButton = document.createElement("button");
@@ -114,6 +120,7 @@ const addCakeToContentArea = (res) => {
 
     const modalBody = document.createElement("div");
     modalBody.setAttribute("class", "modal-body");
+    modalBody.setAttribute("id",`modal-body${res.data.id}`);
 
     const text5 = document.createTextNode(`${res.data.cakeDescription}`);
 
@@ -244,7 +251,7 @@ const updateCake = () => {
         "id" : updateId.value,
         "cakeName" : updateName.value, 
         "cakeDescription" : updateDescription.value,
-        "updateURL" : updateURL.value
+        "cakeURL" : updateURL.value
     }
 
     axios
@@ -252,12 +259,24 @@ const updateCake = () => {
         .then(res =>{
             console.log(res);
             updateDisplay(res);
-            resetUpdateForm();
+            // resetUpdateForm();
         })
 }
 
 const updateDisplay = (res) => {
-    const toUpdate = document.querySelector(`#`);
+    const cardName = document.querySelector(`#cardCakeName${res.data.id}`);
+    cardName.innerHTML = `${res.data.cakeName}`;
+
+    const cardURL = document.querySelector(`#URL${res.data.id}`);
+    cardURL.setAttribute("src",`${res.data.cakeURL}`);
+    cardURL.setAttribute("alt",`${res.data.cakeName}`);
+
+    const modalTitle = document.querySelector(`#h52${res.data.id}`);
+    modalTitle.innerHTML = `${res.data.cakeName}`;
+
+    const modalBody = document.querySelector(`#modal-body${res.data.id}`);
+    modalBody.innerHTML = `${res.data.cakeName}`;
+
 }
 
 //Event listeners
